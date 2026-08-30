@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>CU Assistant — Chandigarh University AI Campus Chatbot</title>
+<meta name="description" content="24×7 AI campus assistant for Chandigarh University — admissions, CUCET, courses, fees, scholarships, placements, hostels and more.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%231f3fb8'/%3E%3Cpath d='M50 18 14 34l36 16 28-12.4V60h6V34z' fill='%23fff'/%3E%3Cpath d='M30 52v12c0 7 9 13 20 13s20-6 20-13V52l-20 9z' fill='%23ffb020'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+<div class="app">
+
+  <!-- ============================ SIDEBAR ============================ -->
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <div class="brand-logo" aria-hidden="true">
+        <svg viewBox="0 0 100 100"><path d="M50 14 10 32l40 18 31-13.9V62h7V32z" fill="currentColor"/><path d="M28 54v13c0 8 10 15 22 15s22-7 22-15V54l-22 10z" fill="#ffb020"/></svg>
+      </div>
+      <div class="brand-text">
+        <h1>CU Assistant</h1>
+        <span>Chandigarh University</span>
+      </div>
+    </div>
+
+    <button class="new-chat" id="newChat">
+      <svg viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+      New Chat
+    </button>
+
+    <div class="side-section">
+      <h3>Explore Campus</h3>
+      <div class="explore-grid" id="exploreGrid"><!-- JS cards --></div>
+    </div>
+
+    <div class="helpline-card">
+      <div class="helpline-title">📞 Admission Helpline</div>
+      <a href="tel:+911603044444" class="helpline-number">+91-160-3044444</a>
+      <a href="https://www.cuchd.in" target="_blank" rel="noopener" class="helpline-link">cuchd.in ↗</a>
+    </div>
+
+    <div class="side-footer">
+      <span class="dot-pulse"></span> Unofficial student-assistant demo · verify details on cuchd.in
+    </div>
+  </aside>
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <!-- ============================ MAIN ============================ -->
+  <main class="main">
+    <header class="topbar">
+      <button class="icon-btn hamburger" id="hamburger" aria-label="Menu">
+        <svg viewBox="0 0 24 24" width="22" height="22"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+      <div class="bot-identity">
+        <div class="bot-avatar">
+          <svg viewBox="0 0 100 100"><path d="M50 14 10 32l40 18 31-13.9V62h7V32z" fill="currentColor"/><path d="M28 54v13c0 8 10 15 22 15s22-7 22-15V54l-22 10z" fill="#ffb020"/></svg>
+          <span class="online-dot"></span>
+        </div>
+        <div class="bot-meta">
+          <strong>CU Assistant</strong>
+          <span class="status"><span class="status-dot"></span> Online · replies instantly</span>
+        </div>
+      </div>
+      <div class="top-actions">
+        <button class="icon-btn" id="ttsToggle" title="Read answers aloud" aria-label="Voice output">
+          <svg viewBox="0 0 24 24" width="20" height="20"><path d="M11 5 6 9H3v6h3l5 4z" fill="currentColor"/><path d="M15.5 8.5a5 5 0 0 1 0 7M18 6a8.5 8.5 0 0 1 0 12" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg>
+        </button>
+        <button class="icon-btn" id="themeToggle" title="Toggle theme" aria-label="Theme">
+          <svg class="icon-sun" viewBox="0 0 24 24" width="20" height="20"><circle cx="12" cy="12" r="4.5" fill="currentColor"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M19.1 4.9l-1.8 1.8M6.7 17.3l-1.8 1.8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" width="20" height="20"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z" fill="currentColor"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <div class="ticker" aria-hidden="true">
+      <div class="ticker-track" id="tickerTrack"></div>
+    </div>
+
+    <section class="chat" id="chat">
+      <div class="welcome" id="welcome">
+        <div class="welcome-logo">
+          <svg viewBox="0 0 100 100"><path d="M50 14 10 32l40 18 31-13.9V62h7V32z" fill="currentColor"/><path d="M28 54v13c0 8 10 15 22 15s22-7 22-15V54l-22 10z" fill="#ffb020"/></svg>
+        </div>
+        <h2>Hi, I'm your <span class="grad-text">CU Assistant</span> 👋</h2>
+        <p>Your 24×7 AI guide for Chandigarh University — admissions, CUCET, courses, fees,
+           scholarships, placements, hostels & campus life.</p>
+        <div class="suggest-grid" id="suggestGrid"><!-- JS --></div>
+      </div>
+    </section>
+
+    <div class="chips-row" id="chipsRow"></div>
+
+    <footer class="composer">
+      <div class="composer-inner">
+        <button class="mic-btn" id="micBtn" title="Speak your question" aria-label="Voice input">
+          <svg viewBox="0 0 24 24" width="21" height="21">
+            <rect x="9" y="3" width="6" height="11" rx="3" fill="currentColor"/>
+            <path d="M5.5 11.5a6.5 6.5 0 0 0 13 0M12 18v3" stroke="currentColor" stroke-width="1.9" fill="none" stroke-linecap="round"/>
+          </svg>
+        </button>
+        <textarea id="input" rows="1" placeholder="Ask about admissions, fees, courses, placements…"
+                  aria-label="Message"></textarea>
+        <button class="send-btn" id="sendBtn" title="Send" aria-label="Send message">
+          <svg viewBox="0 0 24 24" width="20" height="20"><path d="M4 12l16-8-6 8 6 8z" fill="currentColor"/></svg>
+        </button>
+      </div>
+      <div class="composer-hint">AI-generated answers may need verification · official site:
+        <a href="https://www.cuchd.in" target="_blank" rel="noopener">cuchd.in</a> · 🎤 voice input · 🔊 read-aloud</div>
+    </footer>
+  </main>
+</div>
+
+<div class="toast" id="toast"></div>
+<script src="/static/js/app.js"></script>
+</body>
+</html>
